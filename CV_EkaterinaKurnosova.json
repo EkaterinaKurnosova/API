@@ -1,0 +1,21 @@
+{
+"name": "Ekaterina",
+"secondname": "Kurnosova",
+"age": 23,
+"phonenumber": "375291567056",
+"adress": 
+{
+"country": "Belarus",
+"city": "Minsk",
+"zip": "220095"
+},
+"expirience": 
+{
+"company": "CJSC MTBank",
+"role": "Financial analyst"
+},
+"education": ["Belarusian State Economic University", "BelHard Acadedemy Software Testing"]
+}
+
+
+
