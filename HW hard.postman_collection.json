@@ -8,6 +8,23 @@
 	"item": [
 		{
 			"name": "1. Авторизоваться под сотрудником 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Set veriables\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user_token1\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -63,6 +80,10 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"//Set veriables\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"task_id\", jsonData.data.id);\r",
+							"\r",
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
@@ -88,7 +109,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer N2IyNmQ3YTE5Y2QzOGUzMjc3Y2JlYWQzNGI4NjA2YzRiOTEzOTBhYTVlZmZhNzNiODcyZDg5OWFkN2FjNGJkNg",
+						"value": "Bearer {{user_token1}}",
 						"type": "text"
 					}
 				],
@@ -142,13 +163,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer N2IyNmQ3YTE5Y2QzOGUzMjc3Y2JlYWQzNGI4NjA2YzRiOTEzOTBhYTVlZmZhNzNiODcyZDg5OWFkN2FjNGJkNg",
+						"value": "Bearer {{user_token1}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"contentType\": \"Task\",\r\n    \"name\": \"Выпить кофе\",\r\n    \"deadline\": null,\r\n    \"parent\": null,\r\n    \"isUrgent\": false,\r\n    \"isTemplate\": false,\r\n    \"statement\": \"Раф с вишнёвым сиропом\",\r\n    \"owner\": {\r\n        \"id\": \"1000104\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"responsible\": {\r\n        \"id\": \"1000180\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"contractor\": null,\r\n    \"attaches\": []\r\n}",
+					"raw": "{\r\n    \"contentType\": \"Task\",\r\n    \"name\": \"Выпить кофе\",\r\n    \"deadline\": null,\r\n    \"parent\": null,\r\n    \"isUrgent\": false,\r\n    \"isTemplate\": false,\r\n    \"statement\": \"Раф с вишнёвым сиропом\",\r\n    \"owner\": {\r\n        \"id\": \"1000104\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"responsible\": {\r\n        \"id\": \"1000105\",\r\n        \"contentType\": \"Employee\"\r\n    },\r\n    \"contractor\": null,\r\n    \"attaches\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,7 +177,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -167,7 +188,7 @@
 						"api",
 						"v3",
 						"task",
-						"1009748"
+						"{{task_id}}"
 					]
 				}
 			},
@@ -183,7 +204,10 @@
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
-							""
+							"\r",
+							"//Set veriables\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"user_token2\", jsonData.access_token);"
 						],
 						"type": "text/javascript"
 					}
@@ -260,7 +284,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer MzUzZWY2YWU3M2YxYTE2ZjAwNmJlMDIwOGYwNjE3M2UxNDAwODYzZDE1MDY2MzM2ZGY4Mjc3OGYzYmExMWE3Ng",
+						"value": "Bearer {{user_token2}}",
 						"type": "text"
 					}
 				],
@@ -274,7 +298,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748/doAction",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}/doAction",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -285,7 +309,7 @@
 						"api",
 						"v3",
 						"task",
-						"1009748",
+						"{{task_id}}",
 						"doAction"
 					]
 				}
@@ -316,7 +340,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer MzUzZWY2YWU3M2YxYTE2ZjAwNmJlMDIwOGYwNjE3M2UxNDAwODYzZDE1MDY2MzM2ZGY4Mjc3OGYzYmExMWE3Ng",
+						"value": "Bearer {{user_token2}}",
 						"type": "text"
 					}
 				],
@@ -330,7 +354,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748/doAction",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}/doAction",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -341,7 +365,7 @@
 						"api",
 						"v3",
 						"task",
-						"1009748",
+						"{{task_id}}",
 						"doAction"
 					]
 				}
@@ -372,7 +396,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer MzUzZWY2YWU3M2YxYTE2ZjAwNmJlMDIwOGYwNjE3M2UxNDAwODYzZDE1MDY2MzM2ZGY4Mjc3OGYzYmExMWE3Ng",
+						"value": "Bearer {{user_token2}}",
 						"type": "text"
 					}
 				],
@@ -386,7 +410,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748/comments",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}/comments",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -397,72 +421,8 @@
 						"api",
 						"v3",
 						"task",
-						"1009748",
+						"{{task_id}}",
 						"comments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "8. Авторизоваться под Сотрудником 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "multipart/form-data",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "Exploratory1@1.1",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "Exploratory1@1.1",
-							"type": "text"
-						},
-						{
-							"key": "grant_type",
-							"value": "password",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/auth/access_token",
-					"protocol": "https",
-					"host": [
-						"radio-shop",
-						"megaplan",
-						"by"
-					],
-					"path": [
-						"api",
-						"v3",
-						"auth",
-						"access_token"
 					]
 				}
 			},
@@ -493,7 +453,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer OTI2ZDRkZDRhYzFkMTc2YTU2ZDgxZmI4MTY4M2Y5M2ZmMTlhZGFkYmY1NTdhODM3YmMxNDZhYzBkMDVlY2IwNQ",
+						"value": "Bearer {{user_token1}}",
 						"type": "text"
 					}
 				],
@@ -507,7 +467,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748/doAction",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}/doAction",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -518,7 +478,7 @@
 						"api",
 						"v3",
 						"task",
-						"1009748",
+						"{{task_id}}",
 						"doAction"
 					]
 				}
@@ -555,7 +515,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer OTI2ZDRkZDRhYzFkMTc2YTU2ZDgxZmI4MTY4M2Y5M2ZmMTlhZGFkYmY1NTdhODM3YmMxNDZhYzBkMDVlY2IwNQ",
+						"value": "Bearer {{user_token1}}",
 						"type": "text"
 					}
 				],
@@ -569,7 +529,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -580,7 +540,7 @@
 						"api",
 						"v3",
 						"task",
-						"1009748"
+						"{{task_id}}"
 					]
 				}
 			},
@@ -607,12 +567,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer OTI2ZDRkZDRhYzFkMTc2YTU2ZDgxZmI4MTY4M2Y5M2ZmMTlhZGFkYmY1NTdhODM3YmMxNDZhYzBkMDVlY2IwNQ",
+						"value": "Bearer {{user_token1}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "https://radio-shop.megaplan.by/api/v3/task/1009748",
+					"raw": "https://radio-shop.megaplan.by/api/v3/task/{{task_id}}",
 					"protocol": "https",
 					"host": [
 						"radio-shop",
@@ -623,11 +583,48 @@
 						"api",
 						"v3",
 						"task",
-						"1009748"
+						"{{task_id}}"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_token1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_token2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "task_id",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
