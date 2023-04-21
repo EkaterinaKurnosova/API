@@ -17,6 +17,9 @@
 							"var jsonData = pm.response.json();\r",
 							"pm.collectionVariables.set(\"token1\", jsonData.access_token);\r",
 							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -80,7 +83,10 @@
 							"//Set veriables\r",
 							"var jsonData = pm.response.json();\r",
 							"pm.collectionVariables.set(\"offer_id\", jsonData.data.id);\r",
-							""
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -123,6 +129,49 @@
 		},
 		{
 			"name": "api/v3/offer/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Вентилятор Белый Мини Про\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.article).to.eql(\"АРТ1\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.price.value).to.eql(100);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.price.currency).to.eql(\"USD\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.unit.name).to.eql(\"кг\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.tax.name).to.eql(\"10 %\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -152,6 +201,29 @@
 		},
 		{
 			"name": "api/v3/offer/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Вентилятор Чёрный\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.price.value).to.eql(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -190,6 +262,19 @@
 		},
 		{
 			"name": "api/v3/offer/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -228,6 +313,19 @@
 		},
 		{
 			"name": "api/v3/offer/Final",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
